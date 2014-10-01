@@ -38,9 +38,9 @@ In this module, you create a custom controller with a method that returns a list
     ![](images/hotel-tab.jpg)
 
 6. Enter a couple of hotels with location information. For example:
-  - Marriott Marquis (37.785143 -122.403405)
-  - Hilton Union Square (37.786164 -122.410137)
-  - Hyatt (37.794157 -122.396311)
+  - Marriott Marquis (Latitude: 37.785143 Longitude: -122.403405)
+  - Hilton Union Square (Latitude: 37.786164 Longitude: -122.410137)
+  - Hyatt (Latitude: 37.794157 Longitude: -122.396311)
 
     ![](images/marriott.jpg)
 

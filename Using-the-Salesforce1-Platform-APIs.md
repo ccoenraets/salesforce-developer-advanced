@@ -64,7 +64,11 @@ You need Node.js to perform the exercises in this module. If you don't already h
     ```
     npm install
     ```
-
+    
+    If you are on Windows and run into issues running npm after installing Node.js, try this:
+    - Add **c:\Program Files\Nodejs** to your path or run **"C:\Program Files\Nodejs\npm" install** instead of npm install
+    - Create an **npm** directory in C:\Users\[yourname]\Appdata\Roaming
+    
 1. Start the server:  
 
     ```
@@ -73,7 +77,7 @@ You need Node.js to perform the exercises in this module. If you don't already h
 
 ## Step 4: Implement Salesforce Authentication using OAuth
 
-1. Using your favorite code editor, open **index.html** in **salesforce-developer-advanced**
+1. Using your favorite code editor, open **index.html** in **salesforce-developer-advanced/client**
 
 1. In the last script block (right after the **Initialize forcejs here** comment), initialize the forcejs library and initiate the login process: 
 
@@ -106,7 +110,7 @@ You need Node.js to perform the exercises in this module. If you don't already h
 1. In app.js, implement the **getSessionList()** function as follows:
 
     ```
-    function getSessionList() {
+    function getSessionList(success, error) {
         var soql = "SELECT Session__r.Id, Session__r.Name FROM Session_Speaker__c";
         force.query(soql, success, error);
     }
