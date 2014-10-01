@@ -64,7 +64,9 @@ In this module, you explore a different deployment option for the Conference app
 
 1. Click the Preview button to test the application.
 
-## Notes
+## Note on Data Access Strategy
+
+When an application is running inside a Visualforce page, it may be advantageous to use JavaScript Remoting or Remote Objects instead of the REST APIs because JavaScript Remoting or Remote Objects calls don't count towards your governor limits for API calls. [Module 3](Using-JavaScript-in-Visualforce-Pages.html) provides an example of using JavaScript Remoting.
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
