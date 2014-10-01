@@ -35,7 +35,6 @@ function showSessionDetails(sessionId) {
 
     getSessionDetails(sessionId,
         function (data) {
-            console.log(data);
             var session = data.records[0],
             html =
                 '<div class="page">' +
