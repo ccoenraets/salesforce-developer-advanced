@@ -4,7 +4,46 @@ title: Module 7&#58; Testing
 ---
 In this module, you write tests for the RejectDoubleBooking trigger you created in module 6.
 
-## Step 1: Create a Test Class
+## Step 1: Create a Trigger that Rejects Double Bookings
+
+1. In the Developer Console, click **File** > **New** > **Apex Trigger**
+
+1. Specify **RejectDoubleBooking** as the trigger name, **Session&#95;Speaker__c** as the sObject, and click **Submit**
+
+1. Implement the trigger as follows:
+
+    ```
+    trigger RejectDoubleBooking on Session_Speaker__c (before insert, before update) {
+
+        for(Session_Speaker__c sessionSpeaker : trigger.new) {
+
+            // Retrieve session information including session date and time
+            Session__c session = [SELECT Id, Session_Date__c FROM Session__c
+                                    WHERE Id=:sessionSpeaker.Session__c];
+
+            // Retrieve conflicts: other assignments for that speaker at the same time
+            List<Session_Speaker__c> conflicts =
+                [SELECT Id FROM Session_Speaker__c
+                    WHERE Speaker__c = :sessionSpeaker.Speaker__c
+                    AND Session__r.Session_Date__c = :session.Session_Date__c];
+
+            // If conflicts exist, add an error (reject the database operation)
+            if(!conflicts.isEmpty()){
+                sessionSpeaker.addError('The speaker is already booked at that time');
+            }
+
+        }
+
+    }
+    ```
+
+1. Save the file
+
+1. Test the trigger:
+  - Assign a speaker to a session scheduled at a time the speaker is available and make sure it still works
+  - Assign a speaker to a session scheduled at the same time as another session the speaker is already assigned to: you should see the error message
+
+## Step 2: Create a Test Class
 
 1. In the Developer Console, select **File** > **New** > **Apex Class**, specify **TestRejectDoubleBooking** as the class name and click **OK**
 
@@ -17,7 +56,7 @@ In this module, you write tests for the RejectDoubleBooking trigger you created 
     }
     ```
 
-## Step 2: Add a Test Method to Test Single Bookings
+## Step 3: Add a Test Method to Test Single Bookings
 
 1. Add a **TestSingleBooking()** method to the TestRejectDoubleBooking class to make sure the trigger does not prevent a valid speaker booking:
 
@@ -50,7 +89,7 @@ In this module, you write tests for the RejectDoubleBooking trigger you created 
     ![](images/test1.jpg)
 
 
-## Step 3: Add a Test Method to Test Double Bookings
+## Step 4: Add a Test Method to Test Double Bookings
 
 1. Add a **TestDoubleBooking()** method to the TestRejectDoubleBooking class to make sure trigger actually rejects double bookings:
 

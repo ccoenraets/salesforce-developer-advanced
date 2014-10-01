@@ -2,7 +2,7 @@
 layout: module
 title: Module 3&#58; Using JavaScript in Visualforce Pages
 ---
-In this module, you create a custom controller with a method that returns a list of conference hotels. You create a Visualforce page that invokes that method using JavaScript Remoting, and uses the Google Maps SDK to display the hotels on a map.
+In this module, you create a custom controller with a method that returns a list of conference hotels. You create a Visualforce page that invokes that method using JavaScript Remoting and uses the Google Maps SDK to display the hotels on a map.
 
 ![](images/hotelmap.jpg)
 

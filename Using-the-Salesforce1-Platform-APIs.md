@@ -15,12 +15,12 @@ You need Node.js to perform the exercises in this module. If you don't already h
 1. In Setup, click **Build** > **Create** > **Apps**
 
 1. In the **Connected Apps** section, click **New**, and define the Connected App as follows:
-  - Connected App Name: MyConference
-  - API Name: MyConference
-  - Contact Email: enter your email address
-  - Enabled OAuth Settings: Checked
-  - Callback URL: http://localhost:3000/oauthcallback.html
-  - Selected OAuth Scopes: Full Access (full)
+  - Connected App Name: **MyConference**
+  - API Name: **MyConference**
+  - Contact Email: **enter your email address**
+  - Enabled OAuth Settings: **Checked**
+  - Callback URL: **http://localhost:3000/oauthcallback.html**
+  - Selected OAuth Scopes: **Full Access (full)**
 
     ![](images/connected-app.jpg)
 

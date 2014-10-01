@@ -22,7 +22,7 @@ In this module, you deploy a Node.js application to Heroku using the Heroku butt
 
 1. Click **Save**
 
-1. On the Connected App Details screen, click the **Click to reveal** link next to **Consumer Secret**, and copy your secret to your clipboard. You will need it in step 5.
+1. On the Connected App Details screen, click the **Click to reveal** link next to **Consumer Secret**, and copy your secret to your clipboard. You will need it in step 4.
 
     ![](images/reveal_secret.png)
 

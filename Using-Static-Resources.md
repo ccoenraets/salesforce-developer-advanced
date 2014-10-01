@@ -5,9 +5,9 @@ title: Module 5&#58; Using Static Resources
 In this module, you explore a different deployment option for the Conference app you created in the previous module. Instead of deploying it on your own server, you deploy it inside a Visualforce Page in your Salesforce instance. 
 
 
-## Step 1: Upload the Agenda app as a static resource in Salesforce
+## Step 1: Upload the application as a static resource in Salesforce
 
-1. Inside **salesforce-developer-advanced/client**, select the **css**, **fonts**, **js**, and **lib** directories and zip them up (compress them).
+1. In the **salesforce-developer-advanced/client** directory, select the **css**, **fonts**, **js**, and **lib** directories and zip them up (compress them).
 
     > **Important:** Make sure you don't zip up the client directory itself. In other words, if you open the zip file, the css, fonts, js, and lib directories should be at the root level.
 
@@ -15,7 +15,7 @@ In this module, you explore a different deployment option for the Conference app
 
 1. Click **New**
  
-1. Specify **AgendaApp** as the **Name**
+1. Specify **ConferenceApp** as the **Name**
  
 1. Click the **Choose File** button, and select the zip file you just created
 
@@ -24,7 +24,7 @@ In this module, you explore a different deployment option for the Conference app
 
 ## Step 2: Create a Visualforce Page
 
-1. In the **Developer Console**, select **File** > **New** > **Visualforce Page**, specify **Agenda** as the page name and click **OK**
+1. In the **Developer Console**, select **File** > **New** > **Visualforce Page**, specify **ConferenceApp** as the page name and click **OK**
 
 1. Implement Agenda as follows:
 
@@ -34,17 +34,17 @@ In this module, you explore a different deployment option for the Conference app
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    	<link href="{!URLFOR($Resource.conference,'css/ratchet.css')}" rel="stylesheet"/>
-    	<link href="{!URLFOR($Resource.conference,'css/pageslider.css')}" rel="stylesheet"/>
-    	<link href="{!URLFOR($Resource.conference,'css/styles.css')}" rel="stylesheet"/>
+    	<link href="{!URLFOR($Resource.ConferenceApp,'css/ratchet.css')}" rel="stylesheet"/>
+    	<link href="{!URLFOR($Resource.ConferenceApp,'css/pageslider.css')}" rel="stylesheet"/>
+    	<link href="{!URLFOR($Resource.ConferenceApp,'css/styles.css')}" rel="stylesheet"/>
     </head>
     
     <body>
-        <script src="{!URLFOR($Resource.conference,'lib/jquery.js')}"></script>
-        <script src="{!URLFOR($Resource.conference,'lib/router.js')}"></script>
-        <script src="{!URLFOR($Resource.conference,'lib/pageslider.js')}"></script>
-        <script src="{!URLFOR($Resource.conference,'lib/force.js')}"></script>
-        <script src="{!URLFOR($Resource.conference,'js/app.js')}"></script>
+        <script src="{!URLFOR($Resource.ConferenceApp,'lib/jquery.js')}"></script>
+        <script src="{!URLFOR($Resource.ConferenceApp,'lib/router.js')}"></script>
+        <script src="{!URLFOR($Resource.ConferenceApp,'lib/pageslider.js')}"></script>
+        <script src="{!URLFOR($Resource.ConferenceApp,'lib/force.js')}"></script>
+        <script src="{!URLFOR($Resource.ConferenceApp,'js/app.js')}"></script>
     	<script>
     	    // Initialize forcejs here
         </script>    

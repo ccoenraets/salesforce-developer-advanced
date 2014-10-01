@@ -4,7 +4,30 @@ title: Module 8&#58; Batch and Schedule
 ---
 In this module, you create and execute a batch process to send reminder emails to the conference speakers.
 
-## Step 1: Create the Batch Class
+## Step 1: Create the EmailManager class
+
+1. In the Developer Console, click **File** > **New** > **Apex Class**. Specify **EmailManager** as the class name and click **OK**
+
+1. Implement the class as follows:
+
+    ```
+    public class EmailManager {
+
+        public static void sendMail(String address, String subject, String body) {
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            String[] toAddresses = new String[] {address};
+            mail.setToAddresses(toAddresses);
+            mail.setSubject(subject);
+            mail.setPlainTextBody(body);
+            Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+        }
+
+    }
+    ```
+
+1. Click **File** > **Save** to save the file
+
+## Step 2: Create the Batch Class
 
 1. In the Developer Console, select **File** > **New** > **Apex Class**, specify **SendReminderEmail** as the class name and click **OK**
 
@@ -67,7 +90,7 @@ In this module, you create and execute a batch process to send reminder emails t
 1. Save the file.
 
 
-## Step 2: Run the Batch
+## Step 3: Run the Batch
 
 1. Make sure you have assigned your own email address to one of the speakers
 
