@@ -1,16 +1,9 @@
 function getSessionList(success, error) {
-    var soql = "SELECT Session__r.Id, Session__r.Name FROM Session_Speaker__c";
-    force.query(soql, success, error);
+
 }
 
 function getSession(sessionId, success, error) {
-    var soql = "SELECT Session__r.Name, " +
-        "Session__r.Session_Date__c, " +
-        "Speaker__r.First_Name__c, " +
-        "Speaker__r.Last_Name__c " +
-        "FROM Session_Speaker__c " +
-        "WHERE Session__r.Id = '" + sessionId + "'";
-    force.query(soql, success, error);
+
 }
 
 function showSessionList() {
