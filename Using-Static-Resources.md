@@ -60,9 +60,11 @@ In this module, you explore a different deployment option for the Conference app
     router.start();
     ```
     
-    > Note that because you are running inside an authenticated session, you don't have to login to use the agenda application like you had to do in the previous module. All you have to do is initialize ForceJS with the existing access token (or session id).
+    > Note that because you are running inside an authenticated session, you don't have to login using OAuth like you had to do in the previous module. All you have to do is initialize ForceJS with the existing access token (or session id).
 
 1. Click the Preview button to test the application.
+
+## Notes
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
