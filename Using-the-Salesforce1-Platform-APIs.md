@@ -34,7 +34,7 @@ You need Node.js to perform the exercises in this module. If you don't already h
 1. Using your favorite code editor, examine the code in **client/index.html**:
     - It doesn't have any HTML markup inside the body tag. The HTML is build dynamically in JavaScript in the app.js file.
     - It uses ratchet.css. [Ratchet](http://goratchet.com/) is a simple CSS toolkit that provides styles for mobile applications.
-    - It uses [ForceJS](https://github.com/ccoenraets/forcejs), to integrate with Salesforce.
+    - It uses [ForceJS](https://github.com/ccoenraets/forcejs) to integrate with Salesforce.
 
 1. Using your favorite code editor, examine the code in **client/app.js**:
     - It includes the logic to manage a single page application and generate HTML pages on the fly.
