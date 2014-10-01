@@ -2,7 +2,7 @@ function getSessionList(success, error) {
 
 }
 
-function getSession(sessionId, success, error) {
+function getSessionDetails(sessionId, success, error) {
 
 }
 
@@ -33,7 +33,7 @@ function showSessionList() {
 
 function showSessionDetails(sessionId) {
 
-    getSession(sessionId,
+    getSessionDetails(sessionId,
         function (data) {
             console.log(data);
             var session = data.records[0],
