@@ -5,7 +5,7 @@ title: Module 5&#58; Using Static Resources
 In this module, you explore a different deployment option for the Conference app you created in the previous module. Instead of deploying it on your own server, you deploy it inside a Visualforce Page in your Salesforce instance. 
 
 
-## Step 1: Upload the application as a static resource in Salesforce
+## Step 1: Upload the Application as a Static Resource
 
 1. In the **salesforce-developer-advanced/client** directory, select the **css**, **fonts**, **js**, and **lib** directories and zip them up (compress them).
 
@@ -26,7 +26,7 @@ In this module, you explore a different deployment option for the Conference app
 
 1. In the **Developer Console**, select **File** > **New** > **Visualforce Page**, specify **ConferenceApp** as the page name and click **OK**
 
-1. Implement Agenda as follows:
+1. Implement the ConferenceApp page as follows:
 
     ```
     <apex:page sidebar="false" showHeader="false" docType="html" applyBodyTag="false">
