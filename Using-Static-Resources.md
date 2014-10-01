@@ -1,17 +1,19 @@
 ---
 layout: module
-title: Module 9&#58; Using Static Resources
+title: Module 5&#58; Using Static Resources
 ---
-In this module, you deploy the Conference Agenda app inside a Visualforce Page in your Salesforce instance. 
+In this module, you explore a different deployment option for the Conference app you created in the previous module. Instead of deploying it on your own server, you deploy it inside a Visualforce Page in your Salesforce instance. 
 
 
 ## Step 1: Upload the Agenda app as a static resource in Salesforce
 
-1. Zip up the content of the **salesforce-developer-advanced** directory
+1. Inside **salesforce-developer-advanced/client**, select the **css**, **fonts**, **js**, and **lib** directories and zip them up (compress them).
+
+    > **Important:** Make sure you don't zip up the client directory itself. In other words, if you open the zip file, the css, fonts, js, and lib directories should be at the root level.
 
 1. In Setup, click **Build** > **Develop** > **Static Resources**
 
-1. Click new
+1. Click **New**
  
 1. Specify **AgendaApp** as the **Name**
  
@@ -27,22 +29,22 @@ In this module, you deploy the Conference Agenda app inside a Visualforce Page i
 1. Implement Agenda as follows:
 
     ```
-    <apex:page sidebar="false" apiVersion="31" showHeader="false" docType="html" applyBodyTag="false">
+    <apex:page sidebar="false" showHeader="false" docType="html" applyBodyTag="false">
     <html>
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    	<link href="{!URLFOR($Resource.conference, 'css/ratchet.css')}" rel="stylesheet"/>
-    	<link href="{!URLFOR($Resource.conference, 'css/pageslider.css')}" rel="stylesheet"/>
-    	<link href="{!URLFOR($Resource.conference, 'css/styles.css')}" rel="stylesheet"/>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    	<link href="{!URLFOR($Resource.conference,'css/ratchet.css')}" rel="stylesheet"/>
+    	<link href="{!URLFOR($Resource.conference,'css/pageslider.css')}" rel="stylesheet"/>
+    	<link href="{!URLFOR($Resource.conference,'css/styles.css')}" rel="stylesheet"/>
     </head>
     
     <body>
-        <script src="{!URLFOR($Resource.conference, 'lib/jquery.js')}"></script>
-        <script src="{!URLFOR($Resource.conference, 'lib/router.js')}"></script>
-        <script src="{!URLFOR($Resource.conference, 'lib/pageslider.js')}"></script>
-        <script src="{!URLFOR($Resource.conference, 'lib/force.js')}"></script>
-        <script src="{!URLFOR($Resource.conference, 'js/app.js')}"></script>
+        <script src="{!URLFOR($Resource.conference,'lib/jquery.js')}"></script>
+        <script src="{!URLFOR($Resource.conference,'lib/router.js')}"></script>
+        <script src="{!URLFOR($Resource.conference,'lib/pageslider.js')}"></script>
+        <script src="{!URLFOR($Resource.conference,'lib/force.js')}"></script>
+        <script src="{!URLFOR($Resource.conference,'js/app.js')}"></script>
     	<script>
     	    // Initialize forcejs here
         </script>    
@@ -51,7 +53,7 @@ In this module, you deploy the Conference Agenda app inside a Visualforce Page i
     </apex:page>
     ```
     
-1. In the last script block (right after the ** Initialize forcejs here** comment), initialize the force js library as follows: 
+1. In the last script block (right after the **Initialize forcejs here** comment), initialize the force js library as follows: 
 
     ```
     force.init({accessToken: '{!$Api.Session_ID}'});
@@ -62,7 +64,7 @@ In this module, you deploy the Conference Agenda app inside a Visualforce Page i
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
-<a href="Creating-a-Controller-Extension.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
-<a href="Using-the-Salesforce1-Platform-APIs.html" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
+<a href="Using-the-Salesforce1-Platform-APIs.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+<a href="Using-Canvas.html" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
 </div>
 </div>

@@ -1,6 +1,6 @@
 ---
 layout: module
-title: Module 10&#58; Using the Salesforce1 Platform APIs
+title: Module 4&#58; Using the Salesforce1 Platform APIs
 ---
 In this module, you create an application that runs outside your Salesforce instance: it uses OAuth to authenticate with Salesforce, and the REST APIs to access Salesforce data.
 
@@ -46,7 +46,7 @@ You need Node.js to perform the exercises in this module. If you don't already h
 
 1. Using your favorite code editor, examine the code in **client/oauthcallback.html**:
 
-    At the end of the OAuth workflow, the Salesforce authentication process loads the redirect URI you specified in your Connected App and passes the access token and other OAuth values (server instance, refresh token, etc.) in the query string. Your redirect URI page simply needs to parse the query string, extract the access token and the other OAuth values, and pass that information back to your application by invoking the oauthCallback() function you will code in Step 4.
+    At the end of the OAuth workflow, the Salesforce authentication process loads the redirect URI you specified in your Connected App (http://localhost:3000/oauthcallback.html in this case) and passes the access token and other OAuth values (server instance, refresh token, etc.) in the query string. This page simply passes that information to the ForceJS library which needs it to make REST API calls to your Salesforce instance.
 
 1. Using your favorite code editor, examine the code in **server.js**. server.js implements a small HTTP server that provides two features:
     - Web server for static content. The document root for the web server is the client directory.
@@ -71,11 +71,11 @@ You need Node.js to perform the exercises in this module. If you don't already h
     node server
     ```
 
-## Step 4: Authenticate with Salesforce using OAuth
+## Step 4: Implement Salesforce Authentication using OAuth
 
 1. Using your favorite code editor, open **index.html** in **salesforce-developer-advanced**
 
-1. In the last script block (right after the ** Initialize forcejs here** comment), initialize the force js library and initiate the login process: 
+1. In the last script block (right after the **Initialize forcejs here** comment), initialize the forcejs library and initiate the login process: 
 
     ```
     force.init({
@@ -96,15 +96,14 @@ You need Node.js to perform the exercises in this module. If you don't already h
 
 1. Test the application
   - Open a browser and access [http://localhost:3000](http://localhost:3000)
-  - Login with your Developer Edition credentials
-  - Open the browser console: you should see the **OAuth authentication succeeded** message
+  - Login with your Developer Edition credentials. After you successfully authenticate with Salesforce, you will see a blank screen. In the next step you make REST API calls to display the list of sessions.
 
   > It may take a few minutes for a Connected App to be available after you create it. If you get this message: **error=invalid_client_id&error_description=client%20identifier%20invalid**, wait a few minutes and try again.
 
 
 ## Step 5: Using the REST APIs
 
-1. In app.js, implement the **getSessions()** function implemented as follows:
+1. In app.js, implement the **getSessionList()** function as follows:
 
     ```
     function getSessionList() {
@@ -140,6 +139,6 @@ You need Node.js to perform the exercises in this module. If you don't already h
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
 <a href="Using-JavaScript-in-Visualforce-Pages.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
-<a href="Testing.html" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
+<a href="Using-Static-Resources.html" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
 </div>
 </div>

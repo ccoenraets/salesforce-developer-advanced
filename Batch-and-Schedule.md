@@ -1,6 +1,6 @@
 ---
 layout: module
-title: Module 12&#58; Batch and Schedule
+title: Module 8&#58; Batch and Schedule
 ---
 In this module, you create and execute a batch process to send reminder emails to the conference speakers.
 

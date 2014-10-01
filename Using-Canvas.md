@@ -1,6 +1,6 @@
 ---
 layout: module
-title: Module 9&#58; Using Canvas Applications
+title: Module 6&#58; Using Canvas Applications
 ---
 In this module, you deploy a Node.js application to Heroku using the Heroku button. You define a Canvas application to integrate that application in Salesforce, and you add the Canvas application to the Contact Page Layout.
 
@@ -104,7 +104,7 @@ In this module, you deploy a Node.js application to Heroku using the Heroku butt
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
-<a href="Creating-a-Controller-Extension.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
-<a href="Using-the-Salesforce1-Platform-APIs.html" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
+<a href="Using-Static-Resources.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+<a href="Testing.html" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
 </div>
 </div>
