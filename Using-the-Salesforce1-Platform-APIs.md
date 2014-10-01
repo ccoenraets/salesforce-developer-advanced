@@ -10,8 +10,6 @@ In this module, you create an application that runs outside your Salesforce inst
 
 You need Node.js to perform the exercises in this module. If you don't already have Node.js installed on your system, you can install it [here](http://nodejs.org/).
 
-> This module is recommended but optional. If you are not interested in building custom applications (applications hosted outside your Salesforce instance), you can move to Module 11.
-
 ## Step 1: Create a Connected App
 
 1. In Setup, click **Build** > **Create** > **Apps**
@@ -31,7 +29,7 @@ You need Node.js to perform the exercises in this module. If you don't already h
 
 ## Step 2: Install the Supporting Files
 
-1. Download and unzip [this file](https://github.com/ccoenraets/salesforce-developer-workshop/archive/master.zip), or clone [this repository](https://github.com/ccoenraets/salesforce-developer-workshop)
+1. Download and unzip [this file](https://github.com/ccoenraets/salesforce-developer-advanced/archive/master.zip), or clone [this repository](https://github.com/ccoenraets/salesforce-developer-advanced)
 
 1. Using your favorite code editor, examine the code in **client/index.html**:
     - It doesn't have any HTML markup inside the body tag. The HTML is build dynamically in JavaScript in the app.js file.
