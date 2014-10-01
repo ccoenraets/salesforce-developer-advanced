@@ -2,124 +2,63 @@
 layout: module
 title: Module 9&#58; Using Static Resources
 ---
-In this module, you deploy a Node.js application to Heroku using the Heroku button. You define a Canvas application to integrate that application in Salesforce, and you add the Canvas application to the Contact Page Layout.
-
-## Step 2: Install the Supporting Files
-
-1. Download and unzip [this file](https://github.com/ccoenraets/salesforce-developer-workshop/archive/master.zip), or clone [this repository](https://github.com/ccoenraets/salesforce-developer-workshop)
-
-1. Using your favorite code editor, examine the code in **client/index.html**:
-    - It provides the basic markup to render a list of sessions as shown in the screenshot above.
-    - It uses ratchet.css. [Ratchet](http://goratchet.com/) is a simple CSS toolkit that provides styles for mobile applications.
-    - It uses [ForceTK](https://github.com/developerforce/Force.com-JavaScript-REST-Toolkit), the Force.com JavaScript REST Toolkit, to integrate with Salesforce.
-    - You will code the logic of the application (OAuth login) and data access logic in js/app.js which is empty at this time.  
-
-1. Using your favorite code editor, examine the code in **client/oauthcallback.html**:
-
-    At the end of the OAuth workflow, the Salesforce authentication process loads the redirect URI you specified in your Connected App and passes the access token and other OAuth values (server instance, refresh token, etc.) in the query string. Your redirect URI page simply needs to parse the query string, extract the access token and the other OAuth values, and pass that information back to your application by invoking the oauthCallback() function you will code in Step 4.
-
-1. Using your favorite code editor, examine the code in **server.js**. server.js implements a small HTTP server that provides two features:
-    - Web server for static content. The document root for the web server is the client directory.
-    - Proxy for Salesforce REST requests. Because of the browser’s cross-origin restrictions, your JavaScript application hosted on your own server (or localhost) will not be able to make API calls directly to the *.salesforce.com domain. The solution is to proxy your API calls through your own server.
+In this module, you deploy the Conference Agenda app inside a Visualforce Page in your Salesforce instance. 
 
 
-## Step 1: Create a Connected App
+## Step 1: Upload the Agenda app as a static resource in Salesforce
 
-1. In Setup, click **Build** > **Create** > **Apps**
+1. Zip up the content of the **salesforce-developer-advanced** directory
 
-1. In the **Connected Apps** section, click **New**, and define the Connected App as follows:
-  - Connected App Name: **MyCanvas**
-  - API Name: **MyCanvas**
-  - Contact Email: **enter your email address**
-  - Enabled OAuth Settings: **Checked**
-  - Callback URL: **http://localhost** (you will change this later)
-  - Selected OAuth Scopes: **Full Access (full)**
-  - Force.com Canvas: **Checked**
-  - Canvas App URL: **http://localhost/signedrequest** (you will change this later)
-  - Access Method: **Signed Request (POST)**
-  - Locations: **Layouts and Mobile Cards, Publisher**
+1. In Setup, click **Build** > **Develop** > **Static Resources**
 
-1. Click **Save**
-
-1. On the Connected App Details screen, click the **Click to reveal** link next to **Consumer Secret**, and copy your secret to your clipboard. You will need it in step 5.
-
-    ![](images/reveal_secret.png)
-
-
-## Step 2: Configure Access
-
-1. On the Connected App Details screen, click the **Manage** button
-
-    ![](images/manage_canvas.png)
-
-1. Click **Edit**
-
-1. For Permitted Users, select **Admin approved users are pre-authorized**
-
-1. Click **Save**
-
-1. Click **Manage Profiles**
-
-1. Check **System Administrator**
+1. Click new
+ 
+1. Specify **AgendaApp** as the **Name**
+ 
+1. Click the **Choose File** button, and select the zip file you just created
 
 1. Click **Save**
 
 
-## Step 3: Sign Up for Heroku
+## Step 2: Create a Visualforce Page
 
-> You can skip this step if you already have a Heroku account.
+1. In the **Developer Console**, select **File** > **New** > **Visualforce Page**, specify **Agenda** as the page name and click **OK**
 
-1. Open a browser and access the following URL: 
+1. Implement Agenda as follows:
 
-    [http://heroku.com/signup](http://heroku.com/signup)
+    ```
+    <apex:page sidebar="false" apiVersion="31" showHeader="false" docType="html" applyBodyTag="false">
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    	<link href="{!URLFOR($Resource.conference, 'css/ratchet.css')}" rel="stylesheet"/>
+    	<link href="{!URLFOR($Resource.conference, 'css/pageslider.css')}" rel="stylesheet"/>
+    	<link href="{!URLFOR($Resource.conference, 'css/styles.css')}" rel="stylesheet"/>
+    </head>
+    
+    <body>
+        <script src="{!URLFOR($Resource.conference, 'lib/jquery.js')}"></script>
+        <script src="{!URLFOR($Resource.conference, 'lib/router.js')}"></script>
+        <script src="{!URLFOR($Resource.conference, 'lib/pageslider.js')}"></script>
+        <script src="{!URLFOR($Resource.conference, 'lib/force.js')}"></script>
+        <script src="{!URLFOR($Resource.conference, 'js/app.js')}"></script>
+    	<script>
+    	    // Initialize forcejs here
+        </script>    
+    </body>
+    </html>    
+    </apex:page>
+    ```
+    
+1. In the last script block (right after the ** Initialize forcejs here** comment), initialize the force js library as follows: 
 
-1. Enter an email address you have access to at this time (you will need to open an activation email) and click **Signup**
+    ```
+    force.init({accessToken: '{!$Api.Session_ID}'});
+    router.start();
+    ```
 
-1. Check your email. You will receive an activation email for your Heroku account.
-
-1. Click the link in the activation email. Enter your new password information, and click **Save**.
-
-
-## Step 4: Deploy the App to Heroku
-
-1. Access the following GitHub repository:
-
-    [https://github.com/ccoenraets/salesforce-canvas-demo](https://github.com/ccoenraets/salesforce-canvas-demo)
-
-1. Click the **Deploy to Heroku** button
-    ![](images/heroku_deploy.png)
-    - For **App Name**, specify a name for your application. For example, if you specify freds-canvas, your application will be available at http://freds-canvas.herokuapp.com. Your app name has to be unique on the Heroku domain.
-    - For **CONSUMER_SECRET** in the deployment wizard, paste the consumer secret of the connected app you copied in step 1.
-    - Click the **Deploy For Free** button
-
-1. Go back to you Connected App and adjust the URLs based on you Heroku app name:
-     - For **Callback URL**, specify: https://freds-canvas.herokuapp.com
-     - For **Canvas App URL**, specify: https://freds-canvas.herokuapp.com/signedrequest
-
-     
-## Step 5: Add the Canvas App to the Page Layout
-
-![](images/canvas_page_layout.png)
-
-1. In **Setup** mode, select **Build** > **Customize** > **Contacts** > **Page Layouts**
-
-1. Click **Edit** next to **Contact Layout**
-
-1. Select **Canvas Apps**, drag MyCanvas, and drop it immediately after the Description field.
-
-1. Mouse over the canvas in the layout, click the wrench in the upper right corner, specify 550 for the Canvas Height, and click OK.
-
-1. Click **Save** (upper left corner) to save the layout
-
-
-## Step 6: Test the Application
-
-1. Access a Contact
-
-1. The Canvas application should appear in the middle of the page layout
-
-1. Scan the QR code with your mobile phone to create a new contact entry
-
+1. Click the Preview button to test the application.
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">

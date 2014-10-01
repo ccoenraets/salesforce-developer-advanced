@@ -34,10 +34,17 @@ You need Node.js to perform the exercises in this module. If you don't already h
 1. Download and unzip [this file](https://github.com/ccoenraets/salesforce-developer-workshop/archive/master.zip), or clone [this repository](https://github.com/ccoenraets/salesforce-developer-workshop)
 
 1. Using your favorite code editor, examine the code in **client/index.html**:
-    - It provides the basic markup to render a list of sessions as shown in the screenshot above.
+    - It doesn't have any HTML markup inside the body tag. The HTML is build dynamically in JavaScript in the app.js file.
     - It uses ratchet.css. [Ratchet](http://goratchet.com/) is a simple CSS toolkit that provides styles for mobile applications.
-    - It uses [ForceTK](https://github.com/developerforce/Force.com-JavaScript-REST-Toolkit), the Force.com JavaScript REST Toolkit, to integrate with Salesforce.
-    - You will code the logic of the application (OAuth login) and data access logic in js/app.js which is empty at this time.  
+    - It uses [ForceJS](https://github.com/ccoenraets/forcejs), to integrate with Salesforce.
+
+1. Using your favorite code editor, examine the code in **client/app.js**:
+    - It includes the logic to manage a single page application and generate HTML pages on the fly.
+    - The getSessionList() function is responsible for retrieving the list of sessions from your Salesforce instance. You will implement this function in this module. 
+    - The getSessionDetails() function is responsible for retrieving the list of sessions from your Salesforce instance. You will implement this function in this module. 
+    - The showSessionList() function is responsible for generating the HTML for the session list page
+    - The showSessionDetails() function is responsible for generating the HTML for the session details page
+    - The router object is responsible for detecting hashtag changes in the URL and loading the corresponding page 
 
 1. Using your favorite code editor, examine the code in **client/oauthcallback.html**:
 
@@ -47,12 +54,12 @@ You need Node.js to perform the exercises in this module. If you don't already h
     - Web server for static content. The document root for the web server is the client directory.
     - Proxy for Salesforce REST requests. Because of the browser’s cross-origin restrictions, your JavaScript application hosted on your own server (or localhost) will not be able to make API calls directly to the *.salesforce.com domain. The solution is to proxy your API calls through your own server.
 
-## Step 3: Start the Node.js server
 
+## Step 3: Start the Node.js server
 
 1. Open Terminal (Mac) or a Command prompt (Windows)
 
-1. Navigate (cd) to the **salesforce-developer-workshop** (or salesforce-developer-workshop-master) directory
+1. Navigate (cd) to the **salesforce-developer-advanced** (or salesforce-developer-advanced-master) directory
 
 1. Install the Node.js server dependencies:
 
@@ -66,68 +73,28 @@ You need Node.js to perform the exercises in this module. If you don't already h
     node server
     ```
 
-1. Test the application. Open a browser and access the following URL:
-
-    ```
-    http://localhost:3000
-    ```
-
-    Since we didn't authenticate with Salesforce yet, all you should see at this point is an empty list of sessions.
-
 ## Step 4: Authenticate with Salesforce using OAuth
 
-1. Using your favorite code editor, open **app.js** in **salesforce-developer-workshop/client/js**
+1. Using your favorite code editor, open **index.html** in **salesforce-developer-advanced**
 
-1. Declare the following variables:
+1. In the last script block (right after the ** Initialize forcejs here** comment), initialize the force js library and initiate the login process: 
 
     ```
-    var apiVersion = 'v30.0',
-    clientId = 'YOUR_CONSUMER_KEY',
-    loginUrl = 'https://login.salesforce.com/',
-    redirectURI = 'http://localhost:3000/oauthcallback.html',
-    proxyURL = 'http://localhost:3000/proxy/',
-    client = new forcetk.Client(clientId, loginUrl, proxyURL);
+    force.init({
+        appId: 'YOUR_CONSUMER_KEY',
+        proxyURL: 'http://localhost:3000'
+    });
+
+    force.login(router.start, function (error) {
+        alert('Login failed: ' + error);
+    });
     ```
 
 1. In **Setup** (back in Salesforce), click **Build** > **Create** > **Apps**. In the **Connected Apps** section, click **MyConference**, and copy the **Consumer Key** to your clipboard.
 
     ![](images/consumer-key.jpg)
 
-1. In app.js, replace YOUR&#95;CONSUMER_KEY with the consumer key you copied to your clipboard
-
-1. In app.js, declare a function named **login()** implemented as follows (right after the variable declarations):
-
-    ```
-    function login() {
-        var url = loginUrl + 'services/oauth2/authorize?display=popup&response_type=token'
-                    + '&client_id=' + encodeURIComponent(clientId)
-                    + '&redirect_uri=' + encodeURIComponent(redirectURI);
-        window.open(url);
-    }
-    ```
-
-1. Declare a function named **oauthCallback()** implemented as follows (right after the login() function):
-
-    ```
-    function oauthCallback(response) {
-        if (response && response.access_token) {
-            client.setSessionToken(response.access_token,
-                                   apiVersion,
-                                   response.instance_url);
-            console.log('OAuth authentication succeeded');
-        } else {
-            alert("AuthenticationError: No Token");
-        }
-    }
-    ```
-
-    > oauthCallback() is called by the oauthcallback.html page at the end of the OAuth workflow (see oauthcallback.html in step 2 for details).
-
-1. Invoke the login() function as the last line of the app.js file:
-
-    ```
-    login();
-    ```
+1. In index.html, replace YOUR&#95;CONSUMER_KEY with the consumer key you copied to your clipboard
 
 1. Test the application
   - Open a browser and access [http://localhost:3000](http://localhost:3000)
@@ -136,40 +103,37 @@ You need Node.js to perform the exercises in this module. If you don't already h
 
   > It may take a few minutes for a Connected App to be available after you create it. If you get this message: **error=invalid_client_id&error_description=client%20identifier%20invalid**, wait a few minutes and try again.
 
+
 ## Step 5: Using the REST APIs
 
-1. In app.js, declare a function named **getSessions()** implemented as follows (right after the oauthCallback() function):
+1. In app.js, implement the **getSessions()** function implemented as follows:
 
     ```
-    function getSessions() {
-        var soql = "SELECT Id, Name, Session_Date__c FROM Session__c",
-            html = '';
-        client.query(soql,
-            function (data) {
-                var sessions = data.records;
-                for (var i=0; i<sessions.length; i++) {
-                    html += '<li class="table-view-cell">' + sessions[i].Name + '</li>';
-                }
-                $('.session-list').html(html);
-            },
-            function (error) {
-                alert("Error: " + JSON.stringify(error));
-            });
-        return false;
+    function getSessionList() {
+        var soql = "SELECT Session__r.Id, Session__r.Name FROM Session_Speaker__c";
+        force.query(soql, success, error);
     }
     ```
 
-1. Modify the oauthCallback() function to invoke getSessions() when the user has been successfully authenticated.
+1. Implement the **getSessionDetails()** function as follows:
 
     ```
-    console.log('OAuth authentication succeeded');
-    getSessions();
+    function getSessionDetails(sessionId, success, error) {
+        var soql = "SELECT Session__r.Name, " +
+            "Session__r.Session_Date__c, " +
+            "Speaker__r.First_Name__c, " +
+            "Speaker__r.Last_Name__c " +
+            "FROM Session_Speaker__c " +
+            "WHERE Session__r.Id = '" + sessionId + "'";
+        force.query(soql, success, error);
+    }
     ```
 
 1. Test the application
   - Open a browser and access [http://localhost:3000](http://localhost:3000)
   - Login with your Developer Edition credentials
   - You should now see the list of sessions
+  - Click a session to see the details
 
 > This is just the starting point for building a custom application written in JavaScript, authenticating with Salesforce using OAuth, and accessing Salesforce data using the REST APIs. If you are planning on building a real-life application based on this architecture, consider using a JavaScript framework such as [Backbone.js](http://backbonejs.org/) or [AngularJS](https://angularjs.org/) with [Ionic](http://ionicframework.com/).
 
