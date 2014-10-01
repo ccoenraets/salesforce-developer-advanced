@@ -8,17 +8,13 @@ aspects of a conference: sessions, speakers, hotels, etc. You also create a simp
 
 ## What You Will Learn
 
-- Create Custom Objects
-- Use declarative features of the platform to create an Application, create Tabs, and optimize Page Layouts
-- Create Apex Classes
-- Use SOQL and DML to query, create, update and delete data
-- Create Triggers
-- Create Visualforce Pages
-- Create Controller Extensions and Custom Controllers
 - Use JavaScript in Visualforce Pages
 - Authenticate using OAuth
 - Access Salesforce data from JavaScript using JavaScript Remoting
 - Create a Custom Application using the REST APIs
+- Using Static Resources
+- Host a single page application inside a Visualforce Page
+- Create Canvas Applications
 - Create Unit Tests
 - Create Batch Processes
 
