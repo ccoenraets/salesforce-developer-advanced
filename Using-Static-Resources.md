@@ -1,8 +1,27 @@
 ---
 layout: module
-title: Module 9&#58; Using Canvas Applications
+title: Module 9&#58; Using Static Resources
 ---
 In this module, you deploy a Node.js application to Heroku using the Heroku button. You define a Canvas application to integrate that application in Salesforce, and you add the Canvas application to the Contact Page Layout.
+
+## Step 2: Install the Supporting Files
+
+1. Download and unzip [this file](https://github.com/ccoenraets/salesforce-developer-workshop/archive/master.zip), or clone [this repository](https://github.com/ccoenraets/salesforce-developer-workshop)
+
+1. Using your favorite code editor, examine the code in **client/index.html**:
+    - It provides the basic markup to render a list of sessions as shown in the screenshot above.
+    - It uses ratchet.css. [Ratchet](http://goratchet.com/) is a simple CSS toolkit that provides styles for mobile applications.
+    - It uses [ForceTK](https://github.com/developerforce/Force.com-JavaScript-REST-Toolkit), the Force.com JavaScript REST Toolkit, to integrate with Salesforce.
+    - You will code the logic of the application (OAuth login) and data access logic in js/app.js which is empty at this time.  
+
+1. Using your favorite code editor, examine the code in **client/oauthcallback.html**:
+
+    At the end of the OAuth workflow, the Salesforce authentication process loads the redirect URI you specified in your Connected App and passes the access token and other OAuth values (server instance, refresh token, etc.) in the query string. Your redirect URI page simply needs to parse the query string, extract the access token and the other OAuth values, and pass that information back to your application by invoking the oauthCallback() function you will code in Step 4.
+
+1. Using your favorite code editor, examine the code in **server.js**. server.js implements a small HTTP server that provides two features:
+    - Web server for static content. The document root for the web server is the client directory.
+    - Proxy for Salesforce REST requests. Because of the browser’s cross-origin restrictions, your JavaScript application hosted on your own server (or localhost) will not be able to make API calls directly to the *.salesforce.com domain. The solution is to proxy your API calls through your own server.
+
 
 ## Step 1: Create a Connected App
 
