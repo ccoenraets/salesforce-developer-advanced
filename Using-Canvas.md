@@ -27,7 +27,7 @@ In this module, you deploy a Node.js application to Heroku using the Heroku butt
     ![](images/reveal_secret.png)
 
 
-## Step 2: Configure Access
+## Step 2: Configure Permissions
 
 1. On the Connected App Details screen, click the **Manage** button
 
