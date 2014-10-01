@@ -32,21 +32,21 @@ You need Node.js to perform the exercises in this module. If you don't already h
 1. Download and unzip [this file](https://github.com/ccoenraets/salesforce-developer-advanced/archive/master.zip), or clone [this repository](https://github.com/ccoenraets/salesforce-developer-advanced)
 
 1. Using your favorite code editor, examine the code in **client/index.html**:
-    - It doesn't have any HTML markup inside the body tag. The HTML is build dynamically in JavaScript in the app.js file.
+    - It doesn't have any HTML markup inside the body tag. The HTML is built dynamically in JavaScript in the app.js file.
     - It uses ratchet.css. [Ratchet](http://goratchet.com/) is a simple CSS toolkit that provides styles for mobile applications.
     - It uses [ForceJS](https://github.com/ccoenraets/forcejs) to integrate with Salesforce.
 
 1. Using your favorite code editor, examine the code in **client/app.js**:
-    - It includes the logic to manage a single page application and generate HTML pages on the fly.
-    - The getSessionList() function is responsible for retrieving the list of sessions from your Salesforce instance. You will implement this function in this module. 
-    - The getSessionDetails() function is responsible for retrieving the list of sessions from your Salesforce instance. You will implement this function in this module. 
-    - The showSessionList() function is responsible for generating the HTML for the session list page
-    - The showSessionDetails() function is responsible for generating the HTML for the session details page
-    - The router object is responsible for detecting hashtag changes in the URL and loading the corresponding page 
+    - It includes the basic logic to manage a single page application and generate HTML pages on the fly.
+    - The **getSessionList()** function is responsible for retrieving the list of sessions from your Salesforce instance. You will implement this function in this module. 
+    - The **getSessionDetails()** function is responsible for retrieving the details of a specific session from your Salesforce instance. You will implement this function in this module. 
+    - The **showSessionList()** function is responsible for generating the HTML for the session list page
+    - The **showSessionDetails()** function is responsible for generating the HTML for the session details page
+    - The **router** object is responsible for detecting hashtag changes in the URL and loading the corresponding page 
 
 1. Using your favorite code editor, examine the code in **client/oauthcallback.html**:
 
-    At the end of the OAuth workflow, the Salesforce authentication process loads the redirect URI you specified in your Connected App (http://localhost:3000/oauthcallback.html in this case) and passes the access token and other OAuth values (server instance, refresh token, etc.) in the query string. This page simply passes that information to the ForceJS library which needs it to make REST API calls to your Salesforce instance.
+    At the end of the OAuth workflow, the Salesforce authentication process loads the redirect URI you specified in your Connected App (in this case: http://localhost:3000/oauthcallback.html) and passes the access token and other OAuth values (server instance, refresh token, etc.) in the query string. oauthcallback.html simply passes that information to the ForceJS library which uses it to make REST API calls to your Salesforce instance.
 
 1. Using your favorite code editor, examine the code in **server.js**. server.js implements a small HTTP server that provides two features:
     - Web server for static content. The document root for the web server is the client directory.
@@ -65,7 +65,7 @@ You need Node.js to perform the exercises in this module. If you don't already h
     npm install
     ```
     
-    If you are on Windows and run into issues running npm after installing Node.js, try this:
+    If you are on **Windows** and run into issues with npm after installing Node.js, try this:
     - Add **c:\Program Files\Nodejs** to your path or run **"C:\Program Files\Nodejs\npm" install** instead of npm install
     - Create an **npm** directory in C:\Users\[yourname]\Appdata\Roaming
     
@@ -79,7 +79,7 @@ You need Node.js to perform the exercises in this module. If you don't already h
 
 1. Using your favorite code editor, open **index.html** in **salesforce-developer-advanced/client**
 
-1. In the last script block (right after the **Initialize forcejs here** comment), initialize the forcejs library and initiate the login process: 
+1. In the last script block (right after the **Initialize forcejs here** comment), initialize the ForceJS library and initiate the login process: 
 
     ```
     force.init({
@@ -107,7 +107,7 @@ You need Node.js to perform the exercises in this module. If you don't already h
 
 ## Step 5: Using the REST APIs
 
-1. In app.js, implement the **getSessionList()** function as follows:
+1. In client/js/app.js, implement the **getSessionList()** function as follows:
 
     ```
     function getSessionList(success, error) {
