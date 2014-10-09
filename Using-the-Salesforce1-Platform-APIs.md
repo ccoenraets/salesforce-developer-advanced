@@ -36,7 +36,7 @@ You need Node.js to perform the exercises in this module. If you don't already h
     - It uses ratchet.css. [Ratchet](http://goratchet.com/) is a simple CSS toolkit that provides styles for mobile applications.
     - It uses [ForceJS](https://github.com/ccoenraets/forcejs) to integrate with Salesforce.
 
-1. Using your favorite code editor, examine the code in **client/app.js**:
+1. Using your favorite code editor, examine the code in **client/js/app.js**:
     - It includes the basic logic to manage a single page application and generate HTML pages on the fly.
     - The **getSessionList()** function is responsible for retrieving the list of sessions from your Salesforce instance. You will implement this function in this module. 
     - The **getSessionDetails()** function is responsible for retrieving the details of a specific session from your Salesforce instance. You will implement this function in this module. 
