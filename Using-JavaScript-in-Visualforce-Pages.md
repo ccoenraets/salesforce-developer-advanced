@@ -42,7 +42,11 @@ In this module, you create a custom controller with a method that returns a list
   - Hilton Union Square (Latitude: 37.786164 Longitude: -122.410137)
   - Hyatt (Latitude: 37.794157 Longitude: -122.396311)
 
+    > Make sure you include the minus sign when entering the longitude.
+
     ![](images/marriott.jpg)
+
+
 
 ## Step 2: Create the HotelRemoter Controller
 
