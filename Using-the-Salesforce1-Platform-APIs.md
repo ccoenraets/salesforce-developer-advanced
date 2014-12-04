@@ -17,7 +17,7 @@ You need Node.js to perform the exercises in this module. If you don't already h
 
 
 
-> If you can't or don't want to install Node.js on your system, follow [these instructions](/Using-the-Salesforce1-Platform-APIs-heroku.html) to deploy the app on Heroku instead.
+> If you can't or don't want to install Node.js on your system, follow [these instructions](Using-the-Salesforce1-Platform-APIs-heroku.html) to deploy the app on Heroku instead.
 
 
 ## Step 1: Create a Connected App
