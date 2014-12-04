@@ -10,6 +10,16 @@ In this module, you create an application that runs outside your Salesforce inst
 
 You need Node.js to perform the exercises in this module. If you don't already have Node.js installed on your system, you can install it [here](http://nodejs.org/).
 
+**Windows Users**: If you are experiencing problems after installing Node.js on Windows:
+
+1. Add c:\Program Files\Nodejs to your pathorRun "C:\Program Files\Nodejs\npm" install
+1. Create an "npm" directory in C:\Users\[yourname]\Appdata\Roaming
+
+
+
+> If you can't or don't want to install Node.js on your system, follow [these instructions](/Using-the-Salesforce1-Platform-APIs-heroku.html) to deploy the app on Heroku instead.
+
+
 ## Step 1: Create a Connected App
 
 1. In Setup, click **Build** > **Create** > **Apps**
