@@ -17,7 +17,7 @@ blockquote {
 
 .btn-lg {
     border-radius: 2px;
-    background-color: #00A1E1;
+    background-color: #019FDC;
 }
 
 .jumbotron {
@@ -25,13 +25,14 @@ blockquote {
     padding-bottom: 30px;
     padding-top: 30px;
     background-color: #01344e;
-    color: #009CDF
+    color: #019FDC;
 }
 
 .jumbotron h1 {
-    font-size: 34px;
-    font-weight: 400;
+    font-size: 30px;
+    font-weight: 200;
     font-style: normal;
+    margin: 20px 0 50px 0;
 }
 
 /*.navbar {*/
